@@ -2,6 +2,7 @@ package com.sven.viewtouchmeasure.measure;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -65,5 +66,50 @@ public class CustomTitleView extends View {
         mPaint.setTextSize(mTitleTextSize);
         mBound = new Rect();
         mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        int width = 0;
+        int height = 0;
+
+        int specMode = MeasureSpec.getMode(widthMeasureSpec);
+        int specSize = MeasureSpec.getSize(widthMeasureSpec);
+        switch (specMode)
+        {
+            case MeasureSpec.EXACTLY:// 明确指定了
+                width = getPaddingLeft() + getPaddingRight() + specSize;
+                break;
+            case MeasureSpec.AT_MOST:// 一般为WARP_CONTENT
+                width = getPaddingLeft() + getPaddingRight() + mBound.width();
+                break;
+        }
+
+        /**
+         * 设置高度
+         */
+        specMode = MeasureSpec.getMode(heightMeasureSpec);
+        specSize = MeasureSpec.getSize(heightMeasureSpec);
+        switch (specMode)
+        {
+            case MeasureSpec.EXACTLY:// 明确指定了
+                height = getPaddingTop() + getPaddingBottom() + specSize;
+                break;
+            case MeasureSpec.AT_MOST:// 一般为WARP_CONTENT
+                height = getPaddingTop() + getPaddingBottom() + mBound.height();
+                break;
+        }
+        setMeasuredDimension(width, height);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        mPaint.setColor(Color.YELLOW);
+        canvas.drawText(mTitleText, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+
+        mPaint.setColor(mTitleTextColor);
+        canvas.drawText(mTitleText, getWidth()/2 - mBound.width()/2, getHeight()/2 + mBound.height()/2, mPaint);
     }
 }
