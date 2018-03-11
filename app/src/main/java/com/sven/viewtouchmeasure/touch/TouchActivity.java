@@ -24,6 +24,7 @@ public class TouchActivity extends AppCompatActivity {
         bt = (Button) findViewById(R.id.bt);
         myLayout = (LinearLayout) findViewById(R.id.my_layout);
 
+//        Log.i(TAG, "onCreate: " + this.getWindow().getDecorView());
 
         myLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -35,18 +36,37 @@ public class TouchActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onClick: bt...");
+                Log.i(TAG, "bt onClick");
             }
         });
-
+        bt.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.i(TAG, "bt OnLongClick");
+                return false;
+            }
+        });
         bt.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i(TAG, "onTouch: " + event.getAction());
+                Log.i(TAG, "bt onTouch: " + event.getAction());
                 return false;
             }
         });
 
-
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.i(TAG, "activity dispatchTouchEvent: ");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i(TAG, "activity onTouchEvent: ");
+        return super.onTouchEvent(event);
+    }
+
+
 }
