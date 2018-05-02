@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.sven.viewtouchmeasure.measure.MeasureActivity">
     <com.sven.viewtouchmeasure.measure.CustomTitleView
+        android:id="@+id/customeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:titleText="3712"

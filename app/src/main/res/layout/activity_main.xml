@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sven.viewtouchmeasure.MainActivity">
+
+    <Button
+        android:id="@+id/bt1"
+        android:onClick="click"
+        android:text="Touch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bt2"
+        android:onClick="click"
+        android:text="Measure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bt3"
+        android:onClick="click"
+        android:text="Anim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

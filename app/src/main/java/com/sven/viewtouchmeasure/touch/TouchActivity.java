@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.sven.viewtouchmeasure.R;
@@ -13,7 +12,7 @@ import com.sven.viewtouchmeasure.R;
 public class TouchActivity extends AppCompatActivity {
 
     private static final String TAG = "TouchActivity";
-    private Button bt;
+    private MyView myView;
     private LinearLayout myLayout;
 
 
@@ -21,7 +20,7 @@ public class TouchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_touch);
-        bt = (Button) findViewById(R.id.bt);
+        myView = (MyView) findViewById(R.id.myView);
         myLayout = (LinearLayout) findViewById(R.id.my_layout);
 
 //        Log.i(TAG, "onCreate: " + this.getWindow().getDecorView());
@@ -29,42 +28,44 @@ public class TouchActivity extends AppCompatActivity {
         myLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i(TAG, "onTouch: myLayout");
-                return true;
+                Log.i(TAG, "onTouch: myLayout" + event.getAction());
+                return false;
             }
         });
-        bt.setOnClickListener(new View.OnClickListener() {
+        myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "bt onClick");
+                Log.i(TAG, "myView onClick");
             }
         });
-        bt.setOnLongClickListener(new View.OnLongClickListener() {
+        myView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Log.i(TAG, "bt OnLongClick");
+                Log.i(TAG, "myView OnLongClick");
                 return false;
             }
         });
-        bt.setOnTouchListener(new View.OnTouchListener() {
+
+        myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i(TAG, "bt onTouch: " + event.getAction());
+                Log.i(TAG, "myView onTouch: " + event.getAction());
                 return false;
             }
+
         });
 
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.i(TAG, "activity dispatchTouchEvent: ");
+        Log.i(TAG, "activity dispatchTouchEvent: " + ev.getAction());
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i(TAG, "activity onTouchEvent: ");
+        Log.i(TAG, "activity onTouchEvent: " + event.getAction());
         return super.onTouchEvent(event);
     }
 
